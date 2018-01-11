@@ -40,6 +40,7 @@
     <module>crm</module>
     <module>web</module>
     <module>aucs</module>
+    <module>common</module>
   </modules>
 
   <!--dependencyManagement-->
