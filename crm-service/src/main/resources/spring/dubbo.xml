@@ -9,7 +9,7 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 	<!--dubbo-->
-	<dubbo:application name="crm-service"/>
+	<dubbo:application name="${dubbo.application.name}"/>
 	<dubbo:registry address="${dubbo.registry.address}"/>
 	<dubbo:protocol port="${dubbo.registry.port}"/>
 	<dubbo:annotation package="com.chezhibao.crm"/>
