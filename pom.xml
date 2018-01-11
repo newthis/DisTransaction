@@ -38,11 +38,12 @@
   <modules>
     <module>boss-intf</module>
     <module>boss-service</module>
-    <module>web</module>
     <module>aucs-intf</module>
-    <module>common</module>
+    <module>aucs-service</module>
     <module>crm-intf</module>
     <module>crm-service</module>
+    <module>common</module>
+    <module>web</module>
   </modules>
 
   <!--dependencyManagement-->
