@@ -32,6 +32,8 @@
     <junit.version>4.10</junit.version>
     <!--jackson-->
     <jackson.version>2.5.0</jackson.version>
+    <!--fastjson-->
+    <fastjson.version>1.2.28</fastjson.version>
   </properties>
 
   <!--modules-->
@@ -50,6 +52,11 @@
   <dependencyManagement>
     <!--dependencies-->
     <dependencies>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
       <!--zookeeper-->
       <dependency>
         <groupId>org.apache.zookeeper</groupId>
