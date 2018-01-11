@@ -36,11 +36,13 @@
 
   <!--modules-->
   <modules>
-    <module>boss</module>
-    <module>crm</module>
+    <module>boss-intf</module>
+    <module>boss-service</module>
     <module>web</module>
-    <module>aucs</module>
+    <module>aucs-intf</module>
     <module>common</module>
+    <module>crm-intf</module>
+    <module>crm-service</module>
   </modules>
 
   <!--dependencyManagement-->
