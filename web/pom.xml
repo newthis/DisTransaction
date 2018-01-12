@@ -11,6 +11,12 @@
     <name>web</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!--crm-intf-->
+        <dependency>
+            <groupId>com.chezhibao</groupId>
+            <artifactId>crm-intf</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--common-->
         <dependency>
             <groupId>com.chezhibao</groupId>

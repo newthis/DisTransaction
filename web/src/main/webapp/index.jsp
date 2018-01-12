@@ -18,11 +18,7 @@
                             url : 'index/getInfo.do',
                             dataType : 'json',
                             success : function(data){
-                                var list = data.list;
-                                for(var i in list){
-                                    console.log(list[i].ID);
-                                    console.log(list[i].status);
-                                }
+
                             }
                         });
                     }

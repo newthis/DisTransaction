@@ -11,6 +11,8 @@ import ch.qos.logback.classic.joran.JoranConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.StaticLoggerBinder;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 /**
@@ -56,10 +58,10 @@ public class LogBackInitializer {
             //优先加载/opt/logback下,其次本地编译目录下
             File logbackFile = new File(linuxConfPath + logbackName);
             if(!logbackFile.exists()){
-                logbackFile = new File(this.getClass().getClassLoader().getResource("/").getPath() + "logback.xml");
+                logbackFile = new File(this.getClass().getResource("/").getPath() + "logback.xml");
             }
             configurator.doConfigure(logbackFile);
-            logger = LoggerFactory.getLogger("initializer");
+            logger = LoggerFactory.getLogger(LogBackInitializer.class);
             logger.info("logback init success");
         } catch (Exception e) {
             if(logger == null){
