@@ -12,10 +12,14 @@ import com.chezhibao.crm.entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 〈客户信息Dao实现〉<br>
@@ -44,7 +48,7 @@ public class CustomerDaoImpl implements CustomerDao {
         logger.info("Begin Invoke:CustomerDaoImpl.getById,params:{id:" + id + "}");
         String sql = "select * from customer_info where id = ?";
         logger.info("execute sql:" + sql);
-        return jdbcTemplate.queryForObject(sql,Customer.class,id);
+        return jdbcTemplate.queryForObject(sql,new CustomerRowMapper(),id);
     }
     /**
      * 新增客户数据
@@ -53,7 +57,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void insert(Customer customer) {
         logger.info("Begin Invoke:CustomerDaoImpl.insert,params:" + JSON.toJSONString(customer));
-        String sql = "insert into customer_info values (null," + customer.getName() + "," + customer.getSex() + "," + customer.getRegion() + "," + customer.getMobile() + "," + customer.getEmail() + "," + customer.getServiceId() + "," + customer.getServiceName() + ")";
+        String sql = "insert into customer_info values (null,'" + customer.getName() + "'," + customer.getSex() + "," + customer.getRegion() + ",'" + customer.getMobile() + "','" + customer.getEmail() + "'," + customer.getServiceId() + ",'" + customer.getServiceName() + "')";
         logger.info("execute sql:" + sql);
         jdbcTemplate.execute(sql);
     }
@@ -78,7 +82,7 @@ public class CustomerDaoImpl implements CustomerDao {
         logger.info("Begin Invoke:CustomerDaoImpl.update,params:" + JSON.toJSONString(customer));
         String sql = "update customer_info set ";
         if(!StringUtils.isEmpty(customer.getName())){
-            sql += "name = " + customer.getName() + ",";
+            sql += "name = '" + customer.getName() + "',";
         }
         if(customer.getSex() > 0){
             sql += "sex = " + customer.getSex() + ",";
@@ -87,18 +91,19 @@ public class CustomerDaoImpl implements CustomerDao {
             sql += "region = " + customer.getRegion() + ",";
         }
         if(!StringUtils.isEmpty(customer.getMobile())){
-            sql += "mobile = " + customer.getMobile() + ",";
+            sql += "mobile = '" + customer.getMobile() + "',";
         }
         if(!StringUtils.isEmpty(customer.getEmail())){
-            sql += "email = " + customer.getEmail() + ",";
+            sql += "email = '" + customer.getEmail() + "',";
         }
         if(customer.getServiceId() > 0){
             sql += "serviceId = " + customer.getServiceId() + ",";
         }
         if(!StringUtils.isEmpty(customer.getServiceName())){
-            sql += "serviceName = " + customer.getServiceName() + ",";
+            sql += "serviceName = '" + customer.getServiceName() + "',";
         }
         sql = sql.substring(0,sql.length() - 1);
+        sql += " where id = " + customer.getId();
         logger.info("execute sql:" + sql);
         return jdbcTemplate.update(sql);
     }
@@ -110,6 +115,32 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> queryAll() {
         logger.info("Begin Invoke:CustomerDaoImpl.queryAll");
         String sql = "select * from customer_info";
-        return jdbcTemplate.queryForList(sql,Customer.class);
+        logger.info("execute sql:" + sql);
+        return jdbcTemplate.query(sql, new CustomerRowMapper());
+    }
+    /**
+     * 客户转化
+     */
+    class CustomerRowMapper implements RowMapper<Customer>{
+        /**
+         * 映射关系
+         * @param rs ResultSet
+         * @param rowNum 行数
+         * @return 客户对象
+         * @throws SQLException sql异常
+         */
+        @Override
+        public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Customer customer = new Customer();
+            customer.setId(rs.getLong("id"));
+            customer.setName(rs.getString("name"));
+            customer.setSex(rs.getInt("sex"));
+            customer.setRegion(rs.getInt("region"));
+            customer.setMobile(rs.getString("mobile"));
+            customer.setEmail(rs.getString("email"));
+            customer.setServiceId(rs.getLong("serviceId"));
+            customer.setServiceName(rs.getString("serviceName"));
+            return customer;
+        }
     }
 }

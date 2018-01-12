@@ -42,8 +42,7 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.properties</include>
+                    <include>**/*</include>
                 </includes>
             </resource>
             <!-- 结合com.alibaba.dubbo.container.Main -->
