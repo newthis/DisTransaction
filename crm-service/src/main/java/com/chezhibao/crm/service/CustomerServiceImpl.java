@@ -6,7 +6,6 @@
  */
 package com.chezhibao.crm.service;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.chezhibao.crm.dao.CustomerDao;
 import com.chezhibao.crm.entity.Customer;
 import com.chezhibao.crm.intf.CustomerService;
@@ -26,7 +25,6 @@ import java.util.List;
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本]（可选）
  */
-@Service
 public class CustomerServiceImpl implements CustomerService {
 
     private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);

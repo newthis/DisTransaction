@@ -15,4 +15,5 @@
 	<dubbo:annotation package="com.chezhibao.crm"/>
 	<!--protocolConfig和serviceConfig没配置的情况下默认配置-->
 	<dubbo:provider timeout="10000" threadpool="fixed" threads="500" accepts="1000" />
+	<dubbo:service id="customerService" interface="com.chezhibao.crm.intf.CustomerService" class="com.chezhibao.crm.service.CustomerServiceImpl" />
 </beans>

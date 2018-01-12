@@ -23,7 +23,7 @@
     <!--jta版本-->
     <jta.version>1.1</jta.version>
     <!--spring版本-->
-    <spring.version>4.3.1.RELEASE</spring.version>
+    <spring.version>4.2.8.RELEASE</spring.version>
     <!--mysql版本号-->
     <mysql.version>5.1.29</mysql.version>
     <!--log4j日志文件管理包版本-->
@@ -184,6 +184,37 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
         <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>org.springframework.web.servlet</artifactId>
+        <version>3.1.2.RELEASE</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>org.springframework.beans</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>org.springframework.context</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>org.springframework.context.support</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>org.springframework.core</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>org.springframework.expression</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>org.springframework.web</artifactId>
+            <groupId>org.springframework</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <!--junit-->
       <dependency>
