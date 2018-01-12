@@ -57,13 +57,15 @@ public class LogBackInitializer {
             configurator.setContext(loggerContext);
             //优先加载/opt/logback下,其次本地编译目录下
             File logbackFile = new File(linuxConfPath + logbackName);
-            if(!logbackFile.exists()){
-                logbackFile = new File(this.getClass().getResource("/").getPath() + "logback.xml");
+            if(logbackFile.exists()){
+                configurator.doConfigure(logbackFile);
+            }else{
+                configurator.doConfigure(this.getClass().getResourceAsStream("/logback.xml"));
             }
-            configurator.doConfigure(logbackFile);
             logger = LoggerFactory.getLogger(LogBackInitializer.class);
             logger.info("logback init success");
         } catch (Exception e) {
+            e.printStackTrace();
             if(logger == null){
                 logger = LoggerFactory.getLogger(LogBackInitializer.class);
             }
