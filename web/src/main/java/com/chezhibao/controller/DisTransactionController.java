@@ -6,9 +6,7 @@
  */
 package com.chezhibao.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.chezhibao.crm.entity.Customer;
-import com.chezhibao.crm.intf.CustomerService;
+import com.chezhibao.service.BizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,12 +29,9 @@ import java.util.Map;
 public class DisTransactionController {
 
     private Logger logger = LoggerFactory.getLogger(DisTransactionController.class);
-    /**
-     * 客户服务
-     */
-    @SuppressWarnings("unused")
-    @Reference
-    private CustomerService customerService;
+
+    @Resource
+    private BizService bizService;
     /**
      * 获取信息
      * @return 信息
@@ -46,17 +40,13 @@ public class DisTransactionController {
     @ResponseBody
     public Map<String,Object> getInfo(){
         Map<String, Object> result = new HashMap<>(1);
-        List<Customer> customers = null;
         try {
-            customers = customerService.queryAllCustomers();
-            for(Customer customer : customers){
-                logger.info(customer.getName());
-                logger.info(customer.getMobile());
-            }
+            bizService.invoke();
+            result.put("flag",true);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
+            result.put("flag",false);
         }
-        result.put("list", customers);
         return result;
     }
 }

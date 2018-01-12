@@ -1,0 +1,22 @@
+/*
+ * FileName: BizService.java
+ * Author:   Arshle
+ * Date:     2018年01月12日
+ * Description: 业务整合接口
+ */
+package com.chezhibao.service;
+
+/**
+ * 〈业务整合接口〉<br>
+ * 〈业务整合分布式事务接口〉
+ *
+ * @author Arshle
+ * @see [相关类/方法]（可选）
+ * @since [产品/模块版本]（可选）
+ */
+public interface BizService {
+    /**
+     * 执行业务
+     */
+    void invoke();
+}

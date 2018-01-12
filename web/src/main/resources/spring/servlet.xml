@@ -19,7 +19,7 @@
     <!--dubbo-->
     <dubbo:application name="${dubbo.application.name}"/>
     <dubbo:registry address="${dubbo.registry.address}"/>
-    <dubbo:annotation package="com.chezhibao.controller"/>
+    <dubbo:annotation package="com.chezhibao"/>
     <dubbo:consumer retries="0" timeout="${dubbo.consumer.timeout}" check="false"/>
     <!--mvc-->
     <mvc:annotation-driven/>

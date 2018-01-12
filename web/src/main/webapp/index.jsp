@@ -18,7 +18,7 @@
                             url : 'index/getInfo.do',
                             dataType : 'json',
                             success : function(data){
-
+                                alert(data.flag);
                             }
                         });
                     }
