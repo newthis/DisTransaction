@@ -6,7 +6,7 @@
  */
 package com.chezhibao.controller;
 
-import com.chezhibao.service.BizService;
+import com.chezhibao.api.BizApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class DisTransactionController {
     private Logger logger = LoggerFactory.getLogger(DisTransactionController.class);
 
     @Resource
-    private BizService bizService;
+    private BizApi bizApi;
     /**
      * 获取信息
      * @return 信息
@@ -41,7 +41,7 @@ public class DisTransactionController {
     public Map<String,Object> getInfo(){
         Map<String, Object> result = new HashMap<>(1);
         try {
-            bizService.invoke();
+            bizApi.invoke();
             result.put("flag",true);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);

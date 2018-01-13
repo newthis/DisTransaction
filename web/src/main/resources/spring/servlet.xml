@@ -16,10 +16,13 @@
 
     <!-- 配置扫描路径 -->
     <context:property-placeholder location="classpath:config.properties"/>
+    <!--bytejta-->
+    <import resource="classpath:bytejta-supports-dubbo.xml" />
     <!--dubbo-->
     <dubbo:application name="${dubbo.application.name}"/>
     <dubbo:registry address="${dubbo.registry.address}"/>
-    <dubbo:annotation package="com.chezhibao"/>
+    <dubbo:annotation package="com.chezhibao.api"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.registry.port}"/>
     <dubbo:consumer retries="0" timeout="${dubbo.consumer.timeout}" check="false"/>
     <!--mvc-->
     <mvc:annotation-driven/>

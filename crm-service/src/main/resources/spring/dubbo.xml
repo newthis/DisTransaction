@@ -13,7 +13,7 @@
 	<!--dubbo-->
 	<dubbo:application name="${dubbo.application.name}"/>
 	<dubbo:registry address="${dubbo.registry.address}"/>
-	<dubbo:protocol port="${dubbo.registry.port}"/>
+	<dubbo:protocol name="dubbo" port="${dubbo.registry.port}"/>
 	<dubbo:annotation package="com.chezhibao.crm"/>
 	<!--protocolConfig和serviceConfig没配置的情况下默认配置-->
 	<dubbo:provider timeout="10000" threadpool="fixed" threads="500" accepts="1000" />

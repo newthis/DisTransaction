@@ -4,7 +4,7 @@
  * Date:     2018年01月12日
  * Description: 业务整合接口
  */
-package com.chezhibao.service;
+package com.chezhibao.api;
 
 /**
  * 〈业务整合接口〉<br>
@@ -14,7 +14,7 @@ package com.chezhibao.service;
  * @see [相关类/方法]（可选）
  * @since [产品/模块版本]（可选）
  */
-public interface BizService {
+public interface BizApi {
     /**
      * 执行业务
      */

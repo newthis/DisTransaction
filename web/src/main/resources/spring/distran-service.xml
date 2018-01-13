@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!--检测分布式事务接口-->
+	<dubbo:reference id="detectService"
+					 interface="com.chezhibao.boss.intf.DetectService"
+					 group="org.bytesoft.bytejta" filter="transaction"
+					 loadbalance="transaction" cluster="failfast" retries="0" />
+	<!--客户分布式事务接口-->
+	<dubbo:reference id="customerService"
+				   interface="com.chezhibao.crm.intf.CustomerService"
+				   group="org.bytesoft.bytejta" filter="transaction"
+				   loadbalance="transaction" cluster="failfast" retries="0" />
+</beans>
