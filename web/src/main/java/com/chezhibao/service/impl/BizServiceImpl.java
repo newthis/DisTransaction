@@ -12,10 +12,16 @@ import com.chezhibao.boss.intf.DetectService;
 import com.chezhibao.crm.entity.Customer;
 import com.chezhibao.crm.intf.CustomerService;
 import com.chezhibao.service.BizService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.UserTransaction;
 
 /**
  * 〈业务整合服务实现〉<br>
@@ -28,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("bizService")
 public class BizServiceImpl implements BizService{
 
+    private Logger logger = LoggerFactory.getLogger(BizServiceImpl.class);
     /**
      * 客户服务
      */
@@ -40,25 +47,44 @@ public class BizServiceImpl implements BizService{
     @SuppressWarnings("unused")
     @Reference
     private DetectService detectService;
-
+    /**
+     * 用户类型事务
+     */
+    @Autowired
+    @Qualifier("atomikosUserTransaction")
+    private UserTransaction userTransaction;
+    /**
+     * 执行业务逻辑
+     */
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     @Override
     public void invoke() {
-        Customer customer = new Customer();
-        customer.setName("华念文");
-        customer.setSex(1);
-        customer.setRegion(2072);
-        customer.setMobile("13813812300");
-        customer.setEmail("sadasdasd");
-        customer.setServiceId(2);
-        customer.setServiceName("吴静");
-        customerService.addCustomer(customer);
-        Detect detect = new Detect();
-        detect.setStatus(302);
-        detect.setAddress("南京市软件大道");
-        detect.setEngineerName("南京南京南京南京南京南京南京");
-        detect.setEngineerId(3);
-        detect.setRegion(2072);
-        detectService.addDetect(detect);
+        try {
+            userTransaction.begin();
+            Customer customer = new Customer();
+            customer.setName("华念文");
+            customer.setSex(1);
+            customer.setRegion(2072);
+            customer.setMobile("13813812300");
+            customer.setEmail("sadasdasd");
+            customer.setServiceId(2);
+            customer.setServiceName("吴静");
+            customerService.addCustomer(customer);
+            Detect detect = new Detect();
+            detect.setStatus(302);
+            detect.setAddress("南京市软件大道");
+            detect.setEngineerName("南京南京南京南京南京南京南京");
+            detect.setEngineerId(3);
+            detect.setRegion(2072);
+            detectService.addDetect(detect);
+            userTransaction.commit();
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            try {
+                userTransaction.rollback();
+            } catch (Exception e1) {
+                logger.error(e1.getMessage(),e1);
+            }
+        }
     }
 }

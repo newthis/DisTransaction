@@ -11,9 +11,6 @@ import com.chezhibao.crm.entity.Customer;
 import com.chezhibao.crm.intf.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -51,7 +48,6 @@ public class CustomerServiceImpl implements CustomerService {
      * 新增客户
      * @param customer 客户信息
      */
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     @Override
     public void addCustomer(Customer customer) {
         customerDao.insert(customer);
@@ -60,7 +56,6 @@ public class CustomerServiceImpl implements CustomerService {
      * 删除客户
      * @param customer 客户信息
      */
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     @Override
     public void removeCustomer(Customer customer) {
         customerDao.delete(customer);
@@ -70,7 +65,6 @@ public class CustomerServiceImpl implements CustomerService {
      * @param customer 客户信息
      * @return 影响行数
      */
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     @Override
     public int updateCustomer(Customer customer) {
         return customerDao.update(customer);

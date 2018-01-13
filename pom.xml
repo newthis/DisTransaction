@@ -19,7 +19,7 @@
     <!--zkclient版本-->
     <zkclient.version>0.1</zkclient.version>
     <!--atomikos版本-->
-    <atomikos.version>3.9.3</atomikos.version>
+    <atomikos.version>4.0.4</atomikos.version>
     <!--jta版本-->
     <jta.version>1.1</jta.version>
     <!--spring版本-->
