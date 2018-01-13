@@ -11,6 +11,7 @@ import com.chezhibao.boss.entity.Detect;
 import com.chezhibao.boss.intf.DetectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class DetectServiceImpl implements DetectService {
      * 新增检测单
      * @param detect 检测单
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void addDetect(Detect detect) {
         detectDao.insert(detect);
@@ -42,6 +44,7 @@ public class DetectServiceImpl implements DetectService {
      * 删除检测单
      * @param detect 检测单
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void removeDetect(Detect detect) {
         detectDao.delete(detect);
@@ -51,6 +54,7 @@ public class DetectServiceImpl implements DetectService {
      * @param detect 检测单
      * @return 影响行数
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int updateDetect(Detect detect) {
         return detectDao.update(detect);

@@ -8,13 +8,10 @@
 		http://code.alibabatech.com/schema/dubbo
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-	<!--bytejta-->
-	<import resource="classpath:bytejta-supports-dubbo.xml" />
-	<!--dubbo-->
-	<dubbo:application name="${dubbo.application.name}"/>
-	<dubbo:registry address="${dubbo.registry.address}"/>
-	<dubbo:protocol port="${dubbo.registry.port}"/>
-	<dubbo:annotation package="com.chezhibao.boss"/>
-	<!--protocolConfig和serviceConfig没配置的情况下默认配置-->
-	<dubbo:provider timeout="10000" threadpool="fixed" threads="500" accepts="1000" />
+	<!--客户分布式事务接口-->
+	<dubbo:service id="customerService"
+				   interface="com.chezhibao.crm.intf.CustomerService"
+				   class="com.chezhibao.crm.service.CustomerServiceImpl"
+				   group="org.bytesoft.bytejta" filter="transaction"
+				   loadbalance="transaction" cluster="failfast" retries="0" />
 </beans>

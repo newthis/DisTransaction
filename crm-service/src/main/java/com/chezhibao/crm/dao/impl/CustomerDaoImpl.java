@@ -19,7 +19,6 @@ import javax.annotation.Resource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 〈客户信息Dao实现〉<br>
