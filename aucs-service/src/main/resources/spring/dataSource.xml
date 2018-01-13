@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<!--XA DataSource-->
+	<bean id="mysqlXaDataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
+		<property name="url" value="${dataSource.url}"/>
+		<property name="user" value="${dataSource.username}" />
+		<property name="password" value="${dataSource.password}" />
+	</bean>
+	<bean id="dataSourceWrap" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
+		<property name="xaDataSource" ref="mysqlXaDataSource" />
+	</bean>
+	<bean id="aucsXaDataSource" class="org.apache.commons.dbcp.managed.BasicManagedDataSource" destroy-method="close">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="xaDataSourceInstance" ref="dataSourceWrap" />
+		<property name="initialSize" value="${dataSource.initialSize}"/>
+		<property name="maxIdle" value="${dataSource.maxIdle}"/>
+		<property name="maxActive" value="${dataSource.maxActive}" />
+		<property name="maxWait" value="${dataSource.maxWait}" />
+		<property name="minIdle" value="${dataSource.minIdle}" />
+		<property name="removeAbandonedTimeout" value="${dataSource.removeAbandonedTimeout}" />
+		<property name="testWhileIdle" value="${dataSource.testWhileIdle}" />
+		<property name="testOnBorrow" value="${dataSource.testOnBorrow}" />
+		<property name="testOnReturn" value="${dataSource.testOnReturn}" />
+		<property name="validationQuery" value="select 1" />
+		<property name="validationQueryTimeout" value="${dataSource.validationQueryTimeout}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${dataSource.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${dataSource.numTestsPerEvictionRun}" />
+	</bean>
+	<!--JDBC Template-->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="aucsXaDataSource"/>
+	</bean>
+</beans>

@@ -11,6 +11,12 @@
     <name>web</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <!--aucs-intf-->
+        <dependency>
+            <groupId>com.chezhibao</groupId>
+            <artifactId>aucs-intf</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--crm-intf-->
         <dependency>
             <groupId>com.chezhibao</groupId>

@@ -9,18 +9,9 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 	<!--检测分布式事务接口-->
-	<dubbo:reference id="detectService"
-					 interface="com.chezhibao.boss.intf.DetectService"
-					 group="org.bytesoft.bytejta" filter="transaction"
-					 loadbalance="transaction" cluster="failfast" retries="0" />
-	<!--客户分布式事务接口-->
-	<dubbo:reference id="customerService"
-				   interface="com.chezhibao.crm.intf.CustomerService"
+	<dubbo:service id="aucsService"
+				   interface="com.chezhibao.aucs.intf.AuctionService"
+				   class="com.chezhibao.aucs.service.AuctionServiceImpl"
 				   group="org.bytesoft.bytejta" filter="transaction"
 				   loadbalance="transaction" cluster="failfast" retries="0" />
-	<!--竞拍分布式事务接口-->
-	<dubbo:reference id="auctionService"
-					 interface="com.chezhibao.aucs.intf.AuctionService"
-					 group="org.bytesoft.bytejta" filter="transaction"
-					 loadbalance="transaction" cluster="failfast" retries="0" />
 </beans>

@@ -7,6 +7,9 @@
 package com.chezhibao.controller;
 
 import com.chezhibao.api.BizApi;
+import com.chezhibao.aucs.entity.Auction;
+import com.chezhibao.boss.entity.Detect;
+import com.chezhibao.crm.entity.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -38,10 +41,30 @@ public class DisTransactionController {
      */
     @RequestMapping("/getInfo")
     @ResponseBody
-    public Map<String,Object> getInfo(){
+    public Map<String,Object> getInfo(String name,String mobile,String address,String screenName){
         Map<String, Object> result = new HashMap<>(1);
         try {
-            bizApi.invoke();
+            Customer customer = new Customer();
+            customer.setName(name);
+            customer.setSex(1);
+            customer.setRegion(2072);
+            customer.setMobile(mobile);
+            customer.setEmail("test@chezhibao.com");
+            customer.setServiceId(3);
+            customer.setServiceName("吴静");
+            Detect detect = new Detect();
+            detect.setCustomerId(3);
+            detect.setRegion(2072);
+            detect.setEngineerId(3);
+            detect.setEngineerName("华念文");
+            detect.setAddress(address);
+            detect.setStatus(302);
+            Auction auction = new Auction();
+            auction.setOrderId(3);
+            auction.setScreenName(screenName);
+            auction.setRegion(2072);
+            auction.setStatus(601);
+            bizApi.invoke(customer,detect,auction);
             result.put("flag",true);
         } catch (Exception e) {
             logger.error(e.getMessage(),e);

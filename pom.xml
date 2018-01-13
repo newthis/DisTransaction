@@ -35,7 +35,7 @@
     <!--fastjson-->
     <fastjson.version>1.2.28</fastjson.version>
     <!--bytejta-->
-    <bytejta.version>0.5.0-SNAPSHOT</bytejta.version>
+    <bytejta.version>0.4.0-beta5</bytejta.version>
   </properties>
 
   <!--modules-->

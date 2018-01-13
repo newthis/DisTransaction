@@ -6,6 +6,10 @@
  */
 package com.chezhibao.api;
 
+import com.chezhibao.aucs.entity.Auction;
+import com.chezhibao.boss.entity.Detect;
+import com.chezhibao.crm.entity.Customer;
+
 /**
  * 〈业务整合接口〉<br>
  * 〈业务整合分布式事务接口〉
@@ -17,6 +21,8 @@ package com.chezhibao.api;
 public interface BizApi {
     /**
      * 执行业务
+     * @param customer 客户
+     * @param detect 检测
      */
-    void invoke();
+    void invoke(Customer customer, Detect detect, Auction auction);
 }

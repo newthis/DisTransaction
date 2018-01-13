@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="10 seconds" debug="false">
 
-	<property name="LOG_HOME" value="/logs/web" />
+	<property name="LOG_HOME" value="/logs/aucs" />
 
 	<!-- 控制台输出 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -27,13 +27,14 @@
 	<!-- ################################################### 我是分割线 ################################################### -->
 
 	<!-- Dragon -->
-	<logger name="com.chezhibao" level="DEBUG" additivity="false">
+	<logger name="com.chezhibao" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="Dragon"/>
 	</logger>
 
 	<!-- 日志级别 OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL。Log4j建议只使用四个级别，优先级从高到低分别是ERROR、WARN、INFO、DEBUG。通过在这里定义的级别，可以控制到应用程序中相应级别的日志信息的开关。 -->
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
+		<appender-ref ref="Dragon"/>
 	</root>
 </configuration>
