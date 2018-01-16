@@ -4,4 +4,4 @@ bytejta开源地址:https://github.com/liuyangming/ByteJTA
 Atomikos官方网站:https://www.atomikos.com/
 
 集成公司环境的大致架构部署图如下:
-
+![Alt text](/Users/zhangdanji/Desktop/struct.jpg)
